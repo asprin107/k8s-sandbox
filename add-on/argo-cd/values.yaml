@@ -182,7 +182,7 @@ configs:
 
     ## Server properties
     # -- Run server without TLS
-    server.insecure: false
+    server.insecure: true
     # -- Value for base href in index.html. Used if Argo CD is running behind reverse proxy under subpath different from /
     server.basehref: /
     # -- Used if Argo CD is running behind reverse proxy under subpath different from /
@@ -1416,7 +1416,7 @@ server:
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
     seccompProfile:
-      type: RuntimeDefault
+      type: RuntimeDefault # Default : RuntimeDefault / LoadBalancer
     capabilities:
       drop:
       - ALL
@@ -1569,13 +1569,20 @@ server:
 
   ingress:
     # -- Enable an ingress resource for the Argo CD server
-    enabled: false
+    enabled: true
     # -- Additional ingress annotations
-    annotations: {}
+    annotations: {
+      alb.ingress.kubernetes.io/scheme: "internet-facing", # Value value : internet-facing / internal
+      alb.ingress.kubernetes.io/target-type: "ip",
+      alb.ingress.kubernetes.io/healthcheck-path: "/",
+#      alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS,
+#      alb.ingress.kubernetes.io/backend-protocol: HTTPS,
+      alb.ingress.kubernetes.io/success-codes: "200"
+    }
     # -- Additional ingress labels
     labels: {}
     # -- Defines which ingress controller will implement the resource
-    ingressClassName: ""
+    ingressClassName: "alb"
 
     # -- List of ingress hosts
     ## Argo Ingress.
@@ -1614,21 +1621,21 @@ server:
       #     - argocd.example.com
 
     # -- Uses `server.service.servicePortHttps` instead `server.service.servicePortHttp`
-    https: false
+    https: true
 
   # dedicated ingress for gRPC as documented at
   # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/
   ingressGrpc:
     # -- Enable an ingress resource for the Argo CD server for dedicated [gRPC-ingress]
-    enabled: false
+    enabled: true
     # -- Setup up gRPC ingress to work with an AWS ALB
-    isAWSALB: false
+    isAWSALB: true
     # -- Additional ingress annotations for dedicated [gRPC-ingress]
     annotations: {}
     # -- Additional ingress labels for dedicated [gRPC-ingress]
     labels: {}
     # -- Defines which ingress controller will implement the resource [gRPC-ingress]
-    ingressClassName: ""
+    ingressClassName: "alb"
 
     awsALB:
       # -- Service type for the AWS ALB gRPC service
