@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-argo-cd
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing # Value value : internet-facing / internal
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ template "argo-cd.server.fullname" . }}
+                port:
+                  number: {{ .Values.server.service.servicePortHttp }}

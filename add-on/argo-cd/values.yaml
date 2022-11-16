@@ -1784,7 +1784,7 @@ server:
   ## Ref: https://github.com/argoproj-labs/argocd-extensions
   extensions:
     # -- Enable support for Argo UI extensions
-    enabled: false
+    enabled: true
 
     ## Argo UI extensions image
     image:
