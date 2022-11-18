@@ -1,0 +1,15 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: {{ include "action-runner.fullname" . }}
+spec:
+  scaleDownDelaySecondsAfterScaleOut: 180
+  scaleTargetRef:
+    kind: RunnerDeployment
+    name: {{ include "action-runner.fullname" . }}
+  minReplicas: {{ .Values.hpa.minReplicas }}
+  maxReplicas: {{ .Values.hpa.maxReplicas }}
+  metrics:
+    - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
+      repositoryNames: {{ .Values.hpa.repositoryNames }}
+        # A repository name is the REPO part of `github.com/OWNER/REPO`
