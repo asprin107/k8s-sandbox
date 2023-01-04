@@ -5,8 +5,6 @@ metadata:
   namespace: k6-operator-system
   labels:
     control-plane: controller-manager
-  annotations:
-    deployment.kubernetes.io/revision: '1'
 spec:
   replicas: 1
   selector:
@@ -23,6 +21,7 @@ spec:
           image: gcr.io/kubebuilder/kube-rbac-proxy:v0.5.0
           ports:
             - containerPort: 8443
+              name: https
           args:
             - "--secure-listen-address=0.0.0.0:8443"
             - "--upstream=http://127.0.0.1:8080/"

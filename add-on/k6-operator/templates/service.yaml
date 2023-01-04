@@ -6,10 +6,14 @@ metadata:
   labels:
     control-plane: controller-manager
 spec:
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  ipFamilies:
+    - IPv4
   selector:
     control-plane: controller-manager
   ports:
     - name: https
       protocol: TCP
       port: 8443
-      targetPort: 8443
+      targetPort: https
