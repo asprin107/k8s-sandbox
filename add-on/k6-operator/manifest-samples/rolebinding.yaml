@@ -1,0 +1,10 @@
+Name:         k6-operator-leader-election-rolebinding
+Labels:       <none>
+Annotations:  <none>
+Role:
+  Kind:  Role
+  Name:  k6-operator-leader-election-role
+Subjects:
+  Kind            Name                    Namespace
+  ----            ----                    ---------
+  ServiceAccount  k6-operator-controller  k6-operator-system

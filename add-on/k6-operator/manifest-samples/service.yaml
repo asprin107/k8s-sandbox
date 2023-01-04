@@ -1,0 +1,15 @@
+Name:              k6-operator-controller-manager-metrics-service
+Namespace:         k6-operator-system
+Labels:            control-plane=controller-manager
+Annotations:       <none>
+Selector:          control-plane=controller-manager
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                172.20.254.211
+IPs:               172.20.254.211
+Port:              https  8443/TCP
+TargetPort:        https/TCP
+Endpoints:         10.0.4.178:8443
+Session Affinity:  None
+Events:            <none>

@@ -1,0 +1,33 @@
+---
+Name:         k6-operator-manager-role
+Labels:       <none>
+Annotations:  <none>
+PolicyRule:
+  Resources             Non-Resource URLs  Resource Names  Verbs
+  ---------             -----------------  --------------  -----
+  services              []                 []              [create delete get list patch update watch]
+  deployments.apps      []                 []              [create delete get list patch update watch]
+  jobs.batch            []                 []              [create delete get list patch update watch]
+  k6s.k6.io             []                 []              [create delete get list patch update watch]
+  pods/log              []                 []              [get list watch]
+  pods                  []                 []              [get list watch]
+  k6s.k6.io/finalizers  []                 []              [get patch update]
+  k6s.k6.io/status      []                 []              [get patch update]
+  secrets               []                 []              [list get watch]
+---
+Name:         k6-operator-metrics-reader
+Labels:       <none>
+Annotations:  <none>
+PolicyRule:
+  Resources  Non-Resource URLs  Resource Names  Verbs
+  ---------  -----------------  --------------  -----
+  [/metrics]         []              [get]
+---
+Name:         k6-operator-proxy-role
+Labels:       <none>
+Annotations:  <none>
+PolicyRule:
+  Resources                                  Non-Resource URLs  Resource Names  Verbs
+  ---------                                  -----------------  --------------  -----
+  tokenreviews.authentication.k8s.io         []                 []              [create]
+  subjectaccessreviews.authorization.k8s.io  []                 []              [create]

@@ -1,0 +1,38 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: k6-operator-manager-role
+rules:
+  - apiGroups: [""]
+    resources: ["services", "deployments.apps", "jobs.batch", "k6s.k6.io"]
+    verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+  - apiGroups: [""]
+    resources: ["pods/log", "pods"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["k6s.k6.io/finalizers", "k6s.k6.io/status"]
+    verbs: ["get", "patch", "update"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "patch", "update"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: k6-operator-metrics-reader
+rules:
+  - apiGroups: [""]
+    resources: ["/metrics"]
+    verbs: ["get"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: k6-operator-proxy-role
+rules:
+  - apiGroups: [""]
+    resources: ["tokenreviews.authentication.k8s.io", "subjectaccessreviews.authorization.k8s.io"]
+    verbs: ["create"]

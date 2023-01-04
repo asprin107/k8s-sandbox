@@ -1,0 +1,8 @@
+Name:         k6-operator-leader-election-role
+Labels:       <none>
+Annotations:  <none>
+PolicyRule:
+  Resources   Non-Resource URLs  Resource Names  Verbs
+  ---------   -----------------  --------------  -----
+  events      []                 []              [create patch]
+  configmaps  []                 []              [get list watch create update patch delete]

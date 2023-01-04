@@ -1,0 +1,22 @@
+---
+Name:         k6-operator-manager-rolebinding
+Labels:       <none>
+Annotations:  <none>
+Role:
+  Kind:  ClusterRole
+  Name:  k6-operator-manager-role
+Subjects:
+  Kind            Name                    Namespace
+  ----            ----                    ---------
+  ServiceAccount  k6-operator-controller  k6-operator-system
+---
+Name:         k6-operator-proxy-rolebinding
+Labels:       <none>
+Annotations:  <none>
+Role:
+  Kind:  ClusterRole
+  Name:  k6-operator-proxy-role
+Subjects:
+  Kind            Name                    Namespace
+  ----            ----                    ---------
+  ServiceAccount  k6-operator-controller  k6-operator-system

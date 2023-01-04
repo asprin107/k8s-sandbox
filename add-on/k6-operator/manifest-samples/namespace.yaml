@@ -1,0 +1,6 @@
+Name:         k6-operator-system
+Labels:       app.kubernetes.io/name=k6-operator
+  control-plane=controller-manager
+  kubernetes.io/metadata.name=k6-operator-system
+Annotations:  <none>
+Status:       Active
